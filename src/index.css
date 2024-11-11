@@ -1,0 +1,145 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color-scheme: dark;
+  }
+  
+  html, body {
+    @apply bg-dark text-white antialiased min-h-screen overflow-x-hidden;
+  }
+
+  #root {
+    @apply min-h-screen;
+  }
+}
+
+@layer components {
+  .nav-item {
+    @apply p-3 rounded-lg transition-all duration-300;
+  }
+
+  .nav-item.active {
+    @apply bg-brand-red text-white;
+    box-shadow: 0 0 20px theme('colors.brand.red');
+  }
+
+  .digital-screen {
+    @apply bg-dark-card/40 backdrop-blur-md border border-white/10 p-6 rounded-lg relative overflow-hidden;
+  }
+
+  .neon-card {
+    @apply relative rounded-lg overflow-hidden p-4 transition-all duration-300;
+    background: linear-gradient(45deg, 
+      rgba(255,51,51,0.1) 0%,
+      rgba(182,36,255,0.1) 100%
+    );
+  }
+
+  .cyber-button {
+    @apply relative px-6 py-2 bg-dark-card border border-brand-red/30 rounded
+           hover:border-brand-red hover:shadow-[0_0_20px_theme(colors.brand.red/30)]
+           transition-all duration-300 flex items-center space-x-2;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-track {
+    @apply bg-dark-lighter/50 rounded-full;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    @apply bg-brand-red/50 rounded-full hover:bg-brand-red/70;
+  }
+
+  .scanner-line {
+    @apply absolute top-0 left-0 right-0 h-px bg-brand-red/50;
+    animation: scan 2s linear infinite;
+    box-shadow: 0 0 10px theme('colors.brand.red');
+  }
+}
+
+@keyframes scan {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(100%);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 20px theme('colors.brand.red');
+  }
+  50% {
+    box-shadow: 0 0 30px theme('colors.brand.red');
+  }
+}
+
+@keyframes shine {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.animate-shine {
+  animation: shine 2s linear infinite;
+}
+
+.animate-gradient {
+  animation: gradient 3s linear infinite;
+  background-size: 200% 200%;
+}
+
+.neon-border {
+  @apply relative;
+}
+
+.neon-border::before {
+  content: '';
+  @apply absolute inset-0 rounded-lg;
+  background: linear-gradient(45deg,
+    theme('colors.brand.red'),
+    theme('colors.brand.purple'),
+    theme('colors.brand.orange')
+  );
+  z-index: -1;
+  margin: -2px;
+  animation: borderGlow 2s linear infinite;
+}
+
+@keyframes borderGlow {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
